@@ -305,6 +305,6 @@ else:
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; padding: 1rem;">
-    <p>AI Data Assistant • Transform your data into insights • Powered by GPT-4</p>
+    <p>AI Data Assistant • Transform your data into insights •</p>
 </div>
 """, unsafe_allow_html=True)
