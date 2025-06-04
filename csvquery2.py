@@ -10,6 +10,9 @@ import os
 import tempfile
 import plotly.express as px
 import plotly.graph_objects as go
+from langgraph.checkpoint.memory import MemorySaver 
+
+
 
 # Set page config
 st.set_page_config(
@@ -135,14 +138,14 @@ def initialize_agent(db):
 
     Then you should query the schema of the most relevant tables.
     """
-    
-    agent_executor = create_react_agent(llm, tools, prompt=system_message)
+    onfig = {"configurable": {"thread_id": "thread-1"}}  
+    agent_executor = create_react_agent(llm, tools, prompt=system_message, checkpointer= MemorySaver())
     return agent_executor
 
 def query_agent(agent, question):
     """Query the agent with a question"""
     try:
-        result = agent.invoke({"messages": [{"role": "user", "content": question}]})
+        result = agent.invoke({"messages": [{"role": "user", "content": question}]},config)
         return result["messages"][-1].content
     except Exception as e:
         return f"Error: {str(e)}"
