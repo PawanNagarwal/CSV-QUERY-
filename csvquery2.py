@@ -137,14 +137,14 @@ def initialize_agent(db):
     can query. Do NOT skip this step.
 
     Then you should query the schema of the most relevant tables.
-    """
-    onfig = {"configurable": {"thread_id": "thread-1"}}  
+    """ 
     agent_executor = create_react_agent(llm, tools, prompt=system_message, checkpointer= MemorySaver())
     return agent_executor
 
 def query_agent(agent, question):
     """Query the agent with a question"""
     try:
+        config = {"configurable": {"thread_id": "thread-1"}} 
         result = agent.invoke({"messages": [{"role": "user", "content": question}]},config)
         return result["messages"][-1].content
     except Exception as e:
